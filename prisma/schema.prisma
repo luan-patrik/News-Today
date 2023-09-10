@@ -1,0 +1,120 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mongodb"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  name           String?
+  username       String?       @unique
+  email          String?       @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  role           UserRole      @default(USER)
+  accounts       Account[]
+  sessions       Session[]
+  posts          Post[]
+  comments       Comment[]
+  CommentVote    CommentVote[]
+  votes          Vote[]
+}
+
+model Post {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  content   Json?
+  published Boolean   @default(false)
+  authorId  String    @db.ObjectId
+  author    User      @relation(fields: [authorId], references: [id])
+  comments  Comment[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  votes     Vote[]
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  text      String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String   @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+
+  replyToId String?   @db.ObjectId
+  replyTo   Comment?  @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies   Comment[] @relation("ReplyTo")
+
+  votes     CommentVote[]
+  commentId String?
+}
+
+enum VoteType {
+  UP
+  DOWN
+}
+
+model Vote {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  user   User     @relation(fields: [userId], references: [id])
+  userId String   @db.ObjectId
+  post   Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String   @db.ObjectId
+  type   VoteType
+
+  @@unique([userId, postId])
+}
+
+model CommentVote {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String   @db.ObjectId
+  type      VoteType
+
+  @@unique([userId, commentId])
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
