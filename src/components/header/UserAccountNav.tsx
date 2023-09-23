@@ -26,7 +26,7 @@ export const UserAccountNav = ({ user }: UserAccountNavProps) => {
       <DropdownMenuTrigger aria-label="Menu">
         <UserAvatar
           user={{ image: user.image || null }}
-          className="h-8 w-8 ring-2 ring-ring "
+          className="h-8 w-8 ring-2 ring-foreground ring-offset-background"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -52,6 +52,7 @@ export const UserAccountNav = ({ user }: UserAccountNavProps) => {
           className="font-semibold text-red-500 focus:text-red-500"
           onClick={(e) => {
             e.preventDefault()
+            localStorage.clear()
             signOut({ redirect: true, callbackUrl: '/' })
           }}
         >

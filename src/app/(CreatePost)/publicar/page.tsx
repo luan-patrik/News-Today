@@ -1,12 +1,12 @@
-import React from 'react'
-import EditorPost from '@/components/editor/EditorPost'
-import { getAuthSession } from '@/lib/auth'
+import React from "react";
+import EditorPost from "@/components/editor/EditorPost";
+import { getAuthSession } from "@/lib/auth";
 
 export default async function Publish() {
-  const session = await getAuthSession()
+  const session = await getAuthSession();
 
   if (!session?.user) {
-    return <h1>Não autorizado</h1>
+    return <h1>Não autorizado</h1>;
   }
   return (
     <div className="flex flex-col items-start gap-6 container">
@@ -20,5 +20,5 @@ export default async function Publish() {
       {/* form */}
       <EditorPost />
     </div>
-  )
+  );
 }

@@ -1,20 +1,20 @@
-import Link from 'next/link'
-import React from 'react'
-import { Post, Vote } from '@prisma/client'
-import { buttonVariants } from './ui/button'
-import { cn, formatTimeTitle, formatTimeToNow } from '@/lib/utils'
-import { SafeUser } from '@/types/prismadb'
+import Link from "next/link";
+import React from "react";
+import { Post, Vote } from "@prisma/client";
+import { buttonVariants } from "./ui/button";
+import { cn, formatTimeTitle, formatTimeToNow } from "@/lib/utils";
+import { SafeUser } from "@/types/prismadb";
 
-type PartialVote = Pick<Vote, 'type'>
+type PartialVote = Pick<Vote, "type">;
 
 interface PostProps {
   post: Post & {
-    author: SafeUser
-    votes: Vote[]
-  }
-  votesAmt: number
-  currentVote?: PartialVote
-  commentAmt: number
+    author: SafeUser;
+    votes: Vote[];
+  };
+  votesAmt: number;
+  currentVote?: PartialVote;
+  commentAmt: number;
 }
 
 const Post = ({
@@ -31,8 +31,8 @@ const Post = ({
           <Link
             href={`/${post.author.username}/${post.id}`}
             className={cn(
-              buttonVariants({ variant: 'link' }),
-              'p-0 h-fit break-words break-all text-neutral-950 dark:text-neutral-50 visited:text-neutral-600 dark:visited:text-neutral-400 focus-visible:outline-ring'
+              buttonVariants({ variant: "link" }),
+              "p-0 h-fit break-words break-all text-neutral-950 dark:text-neutral-50 visited:text-neutral-600 dark:visited:text-neutral-400 focus-visible:outline-ring"
             )}
           >
             {post.title}
@@ -64,7 +64,7 @@ const Post = ({
         </div>
       </article>
     </div>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;

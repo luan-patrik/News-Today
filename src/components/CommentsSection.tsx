@@ -1,43 +1,51 @@
-import { getAuthSession } from '@/lib/auth'
-import prisma from '@/lib/prismadb'
-import PostComment from './comment/PostComment'
-import CreateComment from './CreateComment'
-import { Comment, CommentVote, User } from '@prisma/client'
+import { getAuthSession } from "@/lib/auth";
+import prisma from "@/lib/prismadb";
+import PostComment from "./comment/PostComment";
+import CreateComment from "./CreateComment";
+import { Comment, CommentVote, User } from "@prisma/client";
 
 type ExtendedComment = Comment & {
-  votes: CommentVote[]
-  author: User
-  replies: ReplyComment[]
-}
+  votes: CommentVote[];
+  author: User;
+  replies: ReplyComment[];
+};
 
 type ReplyComment = Comment & {
-  votes: CommentVote[]
-  author: User
-}
+  votes: CommentVote[];
+  author: User;
+};
 
 interface CommentsSectionProps {
-  postId: string
-  comments: ExtendedComment[]
+  postId: string;
+  comments: ExtendedComment[];
 }
 
 const CommentsSection = async ({ postId }: CommentsSectionProps) => {
-  const session = await getAuthSession()
+  const session = await getAuthSession();
 
   const comments = await prisma.comment.findMany({
     where: {
       postId: postId,
     },
     include: {
-      author: true,
+      author: {
+        select: {
+          username: true,
+        },
+      },
       votes: true,
       replies: {
         include: {
-          author: true,
+          author: {
+            select: {
+              username: true,
+            },
+          },
           votes: true,
         },
       },
     },
-  })
+  });
 
   return (
     <div className="flex flex-col gap-y-4 mt-4">
@@ -51,16 +59,16 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
           .map((topLevelComment) => {
             const topLevelCommentVotesAmt = topLevelComment.votes.reduce(
               (acc, vote) => {
-                if (vote.type === 'UP') return acc + 1
-                if (vote.type === 'DOWN') return acc - 1
-                return acc
+                if (vote.type === "UP") return acc + 1;
+                if (vote.type === "DOWN") return acc - 1;
+                return acc;
               },
               0
-            )
+            );
 
             const topLevelCommentVote = topLevelComment.votes.find(
               (vote) => vote.userId === session?.user.id
-            )
+            );
             return (
               <div key={topLevelComment.id} className="flex flex-col">
                 <div className="mb-2">
@@ -76,14 +84,14 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
                   .sort((a, b) => b.votes.length - a.votes.length)
                   .map((reply) => {
                     const replyVotesAmt = reply.votes.reduce((acc, vote) => {
-                      if (vote.type === 'UP') return acc + 1
-                      if (vote.type === 'DOWN') return acc - 1
-                      return acc
-                    }, 0)
+                      if (vote.type === "UP") return acc + 1;
+                      if (vote.type === "DOWN") return acc - 1;
+                      return acc;
+                    }, 0);
 
                     const replyVote = reply.votes.find(
                       (vote) => vote.userId === session?.user.id
-                    )
+                    );
 
                     return (
                       <div
@@ -97,14 +105,14 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
                           postId={postId}
                         />
                       </div>
-                    )
+                    );
                   })}
               </div>
-            )
+            );
           })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CommentsSection
+export default CommentsSection;

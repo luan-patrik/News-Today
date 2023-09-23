@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { signIn } from 'next-auth/react'
-import { useToast } from '@/components/ui/use-toast'
-import { cn } from '@/lib/utils'
-import { ReactElement, useCallback, useState } from 'react'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { signIn } from "next-auth/react";
+import { useToast } from "@/components/ui/use-toast";
+import { cn } from "@/lib/utils";
+import { ReactElement, useCallback, useState } from "react";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,18 +12,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { Icons } from './Icons'
-import Link from 'next/link'
-import { ChevronLeft, X } from 'lucide-react'
+} from "@/components/ui/card";
+import Link from "next/link";
+import { ChevronLeft, X } from "lucide-react";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
-  onSubmit: () => void
-  title?: string
-  body?: ReactElement
-  footer?: ReactElement
-  actionLabel: string
-  disabled?: boolean
+  onSubmit: () => void;
+  title?: string;
+  body?: ReactElement;
+  footer?: ReactElement;
+  actionLabel: string;
+  disabled?: boolean;
 }
 
 const UserAuthForm = ({
@@ -36,50 +35,50 @@ const UserAuthForm = ({
   className,
   ...props
 }: UserAuthFormProps) => {
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   const handleSubmit = useCallback(() => {
     if (disabled) {
-      return
+      return;
     }
 
-    onSubmit()
-  }, [onSubmit, disabled])
+    onSubmit();
+  }, [onSubmit, disabled]);
 
   const loginWithGoogle = async () => {
     try {
-      await signIn('google')
+      await signIn("google");
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'There was an error logging in with Google',
-        variant: 'destructive',
-      })
+        title: "Error",
+        description: "There was an error logging in with Google",
+        variant: "destructive",
+      });
     }
-  }
+  };
 
   const loginWithGithub = async () => {
     try {
-      await signIn('github')
+      await signIn("github");
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'There was an error logging in with Github',
-        variant: 'destructive',
-      })
+        title: "Error",
+        description: "There was an error logging in with Github",
+        variant: "destructive",
+      });
     }
-  }
+  };
 
   return (
-    <div className={cn('flex justify-center', className)} {...props}>
+    <div className={cn("flex justify-center", className)} {...props}>
       <div className="justify-center items-center flex overflow-x-hidden fixed inset-0 w-full bg-background">
         <Card className="bg-card border-none sm:border-solid rounded-none sm:rounded-md relative w-full sm:w-3/4 md:w-3/6 lg:w-3/7 xl:w-2/6 mx-auto h-full sm:h-auto sm:shadow-md">
           <Link
             title="Voltar para o início"
-            href={'/'}
+            href={"/"}
             className={cn(
-              buttonVariants({ variant: 'ghost', size: 'icon' }),
-              'absolute top-2 right-2'
+              buttonVariants({ variant: "ghost", size: "icon" }),
+              "absolute top-2 right-2"
             )}
           >
             <ChevronLeft />
@@ -127,7 +126,7 @@ const UserAuthForm = ({
         </Card>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserAuthForm
+export default UserAuthForm;

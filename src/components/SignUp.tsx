@@ -21,12 +21,6 @@ import { signIn } from 'next-auth/react'
 
 const FormSchema = z
   .object({
-    // name: z
-    //   .string()
-    //   .min(4, {
-    //     message: 'Deve conter pelo menos 4 caracteres',
-    //   })
-    //   .max(256, { message: 'Deve conter no máximo 256 caracteres' }),
     username: z
       .string()
       .trim()
@@ -71,7 +65,6 @@ const SignUp = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      // name: '',
       username: '',
       email: '',
       password: '',
@@ -109,24 +102,6 @@ const SignUp = () => {
     <div className="grid gap-4 grid-cols-1">
       <Form {...form}>
         <form id="submit-form" onSubmit={form.handleSubmit(onSubmit)}>
-          {/* <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nome</FormLabel>
-                <FormControl>
-                  <Input
-                    type="text"
-                    disabled={isLoading}
-                    autoComplete="false"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
           <FormField
             control={form.control}
             name="username"

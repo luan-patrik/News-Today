@@ -1,29 +1,29 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 
-import '@/styles/globals.css'
+import "@/styles/globals.css";
 
-import ThemeProvider from '@/components/ThemeProvider'
-import Providers from '@/components/Providers'
-import Navbar from '../components/header/Navbar'
-import { Toaster } from '@/components/ui/toaster'
+import ThemeProvider from "@/components/ThemeProvider";
+import Providers from "@/components/Providers";
+import Navbar from "../components/header/Navbar";
+import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Tabnews - CLONE',
-  description: 'Clone do tabnews para estudo',
-}
+  title: "Tabnews - CLONE",
+  description: "Clone do tabnews para estudo",
+};
 
 export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="pt-br" className={inter.className}>
-      <body className="">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Providers>
             <Navbar />
             <div className="py-4">{children}</div>
@@ -32,5 +32,5 @@ export default async function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

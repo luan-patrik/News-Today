@@ -1,14 +1,14 @@
-import React from 'react'
-import PostFeed from '@/components/PostFeed'
+import React from "react";
+import PostFeed from "@/components/PostFeed";
 
-interface PageProps {
+interface PageOfPostsProps {
   params: {
-    page: string
-  }
+    page: string;
+  };
 }
 
-export default function Pagina({ params }: PageProps) {
-  const { page } = params
+export default function PageOfPosts({ params }: PageOfPostsProps) {
+  const { page } = params;
 
-  return <PostFeed numberPage={page} />
+  return <PostFeed numberPage={page} />;
 }

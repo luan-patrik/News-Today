@@ -59,10 +59,7 @@ const Themes = () => {
         </div>
       ) : (
         <button
-          onClick={() =>
-            currentTheme === 'dark' ? setTheme('light') : setTheme('dark')
-          }
-        >
+          onClick={() => currentTheme === 'dark' ? setTheme('light') : setTheme('dark')}>
           {currentTheme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
         </button>
       )}
