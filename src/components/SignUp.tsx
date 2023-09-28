@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import axios from 'axios'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { Input } from '@/components/ui/input'
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Input } from "@/components/ui/input";
 import {
   Form,
   FormField,
@@ -13,90 +13,92 @@ import {
   FormLabel,
   FormItem,
   FormMessage,
-} from '@/components/ui/form'
-import { useToast } from '@/components/ui/use-toast'
-import UserAuthForm from './UserAuthForm'
-import Link from 'next/link'
-import { signIn } from 'next-auth/react'
+} from "@/components/ui/form";
+import { useToast } from "@/components/ui/use-toast";
+import UserAuthForm from "./UserAuthForm";
+import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 const FormSchema = z
   .object({
     username: z
       .string()
       .trim()
-      .regex(/^[a-zA-Z0-9]+$/)
-      .min(3, { message: 'Deve conter pelo menos 6 caracteres' })
-      .max(16, { message: 'Deve conter no máximo 16 caracteres' }),
+      .regex(/^[a-zA-Z0-9]+$/, {
+        message: "Use somente caracteres alfanuméricos",
+      })
+      .min(3, { message: "Deve conter pelo menos 6 caracteres" })
+      .max(16, { message: "Deve conter no máximo 16 caracteres" }),
     email: z
       .string()
       .trim()
       .min(4, {
-        message: 'Deve conter pelo menos 4 caracteres',
+        message: "Deve conter pelo menos 4 caracteres",
       })
-      .email({ message: 'Email inválido' })
-      .max(255, { message: 'Deve conter no máximo 255 caracteres' }),
+      .email({ message: "Email inválido" })
+      .max(255, { message: "Deve conter no máximo 255 caracteres" }),
     password: z
       .string()
-      .min(8, { message: 'Deve conter pelo menos 8 caracteres' })
+      .min(8, { message: "Deve conter pelo menos 8 caracteres" })
       .regex(
-        new RegExp('.*[A-Z].*'),
-        'Deve conter pelo menos 1 caractere maiúsculo'
+        new RegExp(".*[A-Z].*"),
+        "Deve conter pelo menos 1 caractere maiúsculo"
       )
       .regex(
-        new RegExp('.*[a-z].*'),
-        'Deve conter pelo menos 1 caractere minúsculo'
+        new RegExp(".*[a-z].*"),
+        "Deve conter pelo menos 1 caractere minúsculo"
       )
-      .regex(new RegExp('.*\\d.*'), 'Deve conter pelo menos 1 número')
+      .regex(new RegExp(".*\\d.*"), "Deve conter pelo menos 1 número")
       .regex(
-        new RegExp('.*[`~<>?,./!@#$%^&*()\\-_+="\'|{}\\[\\];:\\\\].*'),
-        'Deve conter pelo meno 1 caractere especial'
+        new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"),
+        "Deve conter pelo meno 1 caractere especial"
       ),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    path: ['confirmPassword'],
-    message: 'Senhas não correspondem',
-  })
+    path: ["confirmPassword"],
+    message: "Senhas não correspondem",
+  });
 
 const SignUp = () => {
-  const { toast } = useToast()
-  const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     },
-  })
+  });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-    setIsLoading(true)
+    setIsLoading(true);
     await axios
-      .post('/api/signup', values)
+      .post("/api/signup", values)
       .then(() => {
-        signIn('credentials', {
+        signIn("credentials", {
           email: values.email,
           password: values.password,
           redirect: true,
-          callbackUrl: '/',
-        })
+          callbackUrl: "/",
+        });
         toast({
-          title: 'Sucesso',
-          description: 'Conta criada com sucesso :)',
-        })
+          title: "Sucesso",
+          description: "Conta criada com sucesso :)",
+        });
       })
       .catch((error) => {
-        setIsLoading(false)
+        setIsLoading(false);
         toast({
-          variant: 'destructive',
-          title: 'Algo deu errado :(',
-          description: 'Tente novamente mais tarde',
-        })
-      })
-  }
+          variant: "destructive",
+          title: "Algo deu errado :(",
+          description: "Tente novamente mais tarde",
+        });
+      });
+  };
 
   const bodyContent = (
     <div className="grid gap-4 grid-cols-1">
@@ -167,12 +169,12 @@ const SignUp = () => {
         </form>
       </Form>
     </div>
-  )
+  );
 
   const footerContent = (
     <div className="text-foreground mt-2 font-light text-sm">
       <p>
-        Já tem sua conta?{' '}
+        Já tem sua conta?{" "}
         <Link
           href="/sign-in"
           className="text-blue-500 cursor-pointer underline-offset-2 hover:underline font-semibold"
@@ -181,7 +183,7 @@ const SignUp = () => {
         </Link>
       </p>
     </div>
-  )
+  );
 
   return (
     <UserAuthForm
@@ -192,7 +194,7 @@ const SignUp = () => {
       body={bodyContent}
       footer={footerContent}
     />
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

@@ -1,10 +1,10 @@
-import Link from 'next/link'
-import { UserAccountNav } from './UserAccountNav'
-import { getSession } from '@/actions/getCurrentUser'
-import Themes from '../Themes'
+import Link from "next/link";
+import { UserAccountNav } from "./UserAccountNav";
+import NoUserThemes from "../NoUserThemes";
+import { getServerSession } from "next-auth";
 
 const Navbar = async () => {
-  const session = await getSession()
+  const session = await getServerSession();
 
   return (
     <div className="inset-x-0 h-fit py-2 border-b shadow-sm bg-inherit z-10">
@@ -17,6 +17,7 @@ const Navbar = async () => {
           <UserAccountNav user={session?.user} />
         ) : (
           <div className="text-sm font-semibold flex gap-4">
+            <NoUserThemes />
             <Link
               href="/sign-in"
               className="transition hover:text-neutral-500 dark:hover:dark:text-neutral-400"
@@ -29,12 +30,11 @@ const Navbar = async () => {
             >
               Cadastrar
             </Link>
-            <Themes />
           </div>
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

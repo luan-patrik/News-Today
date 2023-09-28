@@ -53,8 +53,8 @@ model User {
   sessions       Session[]
   posts          Post[]
   comments       Comment[]
-  CommentVote    CommentVote[]
-  votes          Vote[]
+  CommentLike    CommentLike[]
+  likes          Like[]
 }
 
 model Post {
@@ -67,7 +67,7 @@ model Post {
   comments  Comment[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  votes     Vote[]
+  likes     Like[]
 }
 
 model Comment {
@@ -83,33 +83,32 @@ model Comment {
   replyTo   Comment?  @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   replies   Comment[] @relation("ReplyTo")
 
-  votes     CommentVote[]
+  likes     CommentLike[]
   commentId String?
 }
 
-enum VoteType {
+enum LikeType {
   UP
-  DOWN
 }
 
-model Vote {
+model Like {
   id     String   @id @default(auto()) @map("_id") @db.ObjectId
   user   User     @relation(fields: [userId], references: [id])
   userId String   @db.ObjectId
   post   Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String   @db.ObjectId
-  type   VoteType
+  type   LikeType
 
   @@unique([userId, postId])
 }
 
-model CommentVote {
+model CommentLike {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @db.ObjectId
   comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
   commentId String   @db.ObjectId
-  type      VoteType
+  type      LikeType
 
   @@unique([userId, commentId])
 }

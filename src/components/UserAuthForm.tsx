@@ -93,7 +93,8 @@ const UserAuthForm = ({
                 type="button"
                 variant="outline"
                 className="relative bg-accent"
-                onClick={loginWithGoogle}
+                // onClick={loginWithGoogle}
+                disabled={true}
               >
                 Continue com Google
               </Button>
@@ -101,7 +102,8 @@ const UserAuthForm = ({
                 type="button"
                 variant="outline"
                 className="relative bg-accent"
-                onClick={loginWithGithub}
+                // onClick={loginWithGithub}
+                disabled={true}
               >
                 Continue com Github
               </Button>

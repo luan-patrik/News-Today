@@ -1,11 +1,11 @@
 import React, { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { Post, Vote } from "@prisma/client";
+import { Like, Post } from "@prisma/client";
 import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
 import { redis } from "@/lib/redis";
 import { CachedPost } from "@/types/redis";
 import { buttonVariants } from "@/components/ui/button";
-import PostVoteServer from "@/components/post-vote/PostVoteServer";
+import PostLikeServer from "@/components/post-like/PostLikeServer";
 import prisma from "@/lib/prismadb";
 import { formatTimeTitle, formatTimeToNow } from "@/lib/utils";
 import EditorOutput from "@/components/editor/EditorOutput";
@@ -30,7 +30,7 @@ export default async function DetailPost({ params }: DetailPostProps) {
   const session = await getAuthSession();
 
   const cachedPost = (await redis.hgetall(`post:${postId}`)) as CachedPost;
-  let post: (Post & { votes: Vote[]; author: SafeUser }) | null = null;
+  let post: (Post & { likes: Like[]; author: SafeUser }) | null = null;
 
   if (params.postId.length !== 24) notFound();
 
@@ -41,7 +41,7 @@ export default async function DetailPost({ params }: DetailPostProps) {
         id: postId,
       },
       include: {
-        votes: true,
+        likes: true,
         author: {
           select: {
             username: true,
@@ -57,8 +57,8 @@ export default async function DetailPost({ params }: DetailPostProps) {
     <div className="h-full flex flex-1 gap-4 flex-row container">
       <div className="sm:w-0 w-full flex-1">
         <div className="flex">
-          <Suspense fallback={<PostVoteShell />}>
-            <PostVoteServer
+          <Suspense fallback={<PostLikeShell />}>
+            <PostLikeServer
               postId={post?.id ?? cachedPost.id}
               getData={async () => {
                 return await prisma.post.findUnique({
@@ -66,7 +66,7 @@ export default async function DetailPost({ params }: DetailPostProps) {
                     id: params.postId,
                   },
                   include: {
-                    votes: true,
+                    likes: true,
                   },
                 });
               }}
@@ -107,7 +107,7 @@ export default async function DetailPost({ params }: DetailPostProps) {
   );
 }
 
-const PostVoteShell = () => {
+const PostLikeShell = () => {
   return (
     <div className="flex items-center flex-col">
       <div className={buttonVariants({ variant: "ghost" })}>

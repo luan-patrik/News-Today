@@ -7,14 +7,14 @@ import { useGetNumberPosts } from "@/hooks/use-get-number-posts";
 interface PaginationControlsProps {
   page: string;
   allPosts: number;
-  userPage?: boolean;
+  isUserPage?: boolean;
   username?: string;
 }
 
 const PaginationControls = ({
   allPosts,
   page,
-  userPage,
+  isUserPage,
   username,
 }: PaginationControlsProps) => {
   const totalPages = Math.ceil(allPosts / POSTS_PER_PAGE);
@@ -33,7 +33,9 @@ const PaginationControls = ({
         <Link
           className="text-blue-500 flex items-center"
           href={
-            userPage ? `/${username}/pagina/${prevPage}` : `/pagina/${prevPage}`
+            isUserPage
+              ? `/${username}/pagina/${prevPage}`
+              : `/pagina/${prevPage}`
           }
         >
           <ChevronLeft size={20} /> Anterior
@@ -47,7 +49,9 @@ const PaginationControls = ({
         <Link
           className="text-blue-500 flex items-center"
           href={
-            userPage ? `/${username}/pagina/${nextPage}` : `/pagina/${nextPage}`
+            isUserPage
+              ? `/${username}/pagina/${nextPage}`
+              : `/pagina/${nextPage}`
           }
         >
           Proximo <ChevronRight size={20} aria-hidden="true" />

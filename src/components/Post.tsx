@@ -1,31 +1,30 @@
 import Link from "next/link";
 import React from "react";
-import { Post, Vote } from "@prisma/client";
+import { Like, Post } from "@prisma/client";
 import { buttonVariants } from "./ui/button";
 import { cn, formatTimeTitle, formatTimeToNow } from "@/lib/utils";
 import { SafeUser } from "@/types/prismadb";
 
-type PartialVote = Pick<Vote, "type">;
+type PartialLike = Pick<Like, "type">;
 
 interface PostProps {
   post: Post & {
     author: SafeUser;
-    votes: Vote[];
+    likes: Like[];
   };
-  votesAmt: number;
-  currentVote?: PartialVote;
+  likesAmt: number;
+  currentLike?: PartialLike;
   commentAmt: number;
 }
 
 const Post = ({
   post,
-  votesAmt: _votesAmt,
-  currentVote: _currentVote,
+  likesAmt: _likesAmt,
+  currentLike: _currentLike,
   commentAmt,
 }: PostProps) => {
   return (
     <div>
-      {/* news */}
       <article className="overflow-auto">
         <div className="overflow-auto">
           <Link
@@ -40,9 +39,7 @@ const Post = ({
         </div>
         <div className="text-xs text-neutral-600 dark:text-neutral-400 flex mt-2 overflow-auto break-words">
           <div>
-            {_votesAmt < 2 && _votesAmt > -2
-              ? `${_votesAmt} voto`
-              : `${_votesAmt} votos`}
+            {_likesAmt < 2 ? `${_likesAmt} curtida` : `${_likesAmt} curtidas`}
           </div>
           &nbsp;·&nbsp;
           <div className="overflow-auto break-words">

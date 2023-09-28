@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const useGetPostsUser = (username: string, page: number | string) => {
   return useQuery({
-    queryKey: ["posts", page],
+    queryKey: ["posts", username, page],
     queryFn: async () => {
       const { data } = await axios.get(
         `/api/posts/postsUser?username=${username}&page=${page}`

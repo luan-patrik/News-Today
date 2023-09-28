@@ -1,10 +1,9 @@
-import { Comment, Post, User, Vote } from "@prisma/client";
-import { Vote } from "lucide-react";
+import { Comment, Like, Post, User  } from "@prisma/client";
 
 type SafeUser = Omit<User, "name", "hashedPassword", "email", "role">;
 
 export type ExtendedPost = Post & {
-  votes: Vote[];
+  likes: Like[];
   author: SafeUser;
   comments: Comment[];
 };

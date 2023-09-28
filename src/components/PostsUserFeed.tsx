@@ -59,14 +59,14 @@ const PostUserFeed = ({ username, numberPage }: PostUserFeedProps) => {
       <h1 className="font-bold text-2xl">{postsUser?.username}</h1>
       <hr className="my-4" />
       {postsUser?.posts.map((post, index) => {
-        const votesAmt = post.votes.reduce((acc, vote) => {
-          if (vote.type === "UP") return acc + 1;
-          if (vote.type === "DOWN") return acc - 1;
+        const likesAmt = post.likes.reduce((acc, like) => {
+          if (like.type === "UP") return acc + 1;
+          if (like.type === "DOWN") return acc - 1;
           return acc;
         }, 0);
 
-        const currentVote = post.votes.find(
-          (vote) => vote.userId === session?.user.id
+        const currentLike = post.likes.find(
+          (like) => like.userId === session?.user.id
         );
 
         return (
@@ -81,8 +81,8 @@ const PostUserFeed = ({ username, numberPage }: PostUserFeedProps) => {
             <Post
               key={post.id}
               post={post}
-              votesAmt={votesAmt}
-              currentVote={currentVote}
+              likesAmt={likesAmt}
+              currentLike={currentLike}
               commentAmt={post.comments.length}
             />
           </div>
@@ -90,7 +90,7 @@ const PostUserFeed = ({ username, numberPage }: PostUserFeedProps) => {
       })}
       <PaginationControls
         username={postsUser.username}
-        userPage={true}
+        isUserPage={true}
         allPosts={postsUser?._count.posts}
         page={numberPage || "1"}
       />

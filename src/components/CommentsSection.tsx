@@ -2,16 +2,16 @@ import { getAuthSession } from "@/lib/auth";
 import prisma from "@/lib/prismadb";
 import PostComment from "./comment/PostComment";
 import CreateComment from "./CreateComment";
-import { Comment, CommentVote, User } from "@prisma/client";
+import { Comment, CommentLike, User } from "@prisma/client";
 
 type ExtendedComment = Comment & {
-  votes: CommentVote[];
+  likes: CommentLike[];
   author: User;
   replies: ReplyComment[];
 };
 
 type ReplyComment = Comment & {
-  votes: CommentVote[];
+  likes: CommentLike[];
   author: User;
 };
 
@@ -33,7 +33,7 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
           username: true,
         },
       },
-      votes: true,
+      likes: true,
       replies: {
         include: {
           author: {
@@ -41,7 +41,7 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
               username: true,
             },
           },
-          votes: true,
+          likes: true,
         },
       },
     },
@@ -57,40 +57,39 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
         {comments
           .filter((comment) => !comment.replyToId)
           .map((topLevelComment) => {
-            const topLevelCommentVotesAmt = topLevelComment.votes.reduce(
-              (acc, vote) => {
-                if (vote.type === "UP") return acc + 1;
-                if (vote.type === "DOWN") return acc - 1;
+            const topLevelCommentLikesAmt = topLevelComment.likes.reduce(
+              (acc, like) => {
+                if (like.type === "UP") return acc + 1;
                 return acc;
               },
               0
             );
 
-            const topLevelCommentVote = topLevelComment.votes.find(
-              (vote) => vote.userId === session?.user.id
+            const topLevelCommentLike = topLevelComment.likes.find(
+              (like) => like.userId === session?.user.id
             );
             return (
               <div key={topLevelComment.id} className="flex flex-col">
                 <div className="mb-2">
                   <PostComment
                     comment={topLevelComment}
-                    currentVote={topLevelCommentVote}
+                    currentLike={topLevelCommentLike}
                     postId={postId}
-                    votesAmt={topLevelCommentVotesAmt}
+                    likesAmt={topLevelCommentLikesAmt}
                   />
                 </div>
 
                 {topLevelComment.replies
-                  .sort((a, b) => b.votes.length - a.votes.length)
+                  .sort((a, b) => b.likes.length - a.likes.length)
                   .map((reply) => {
-                    const replyVotesAmt = reply.votes.reduce((acc, vote) => {
-                      if (vote.type === "UP") return acc + 1;
-                      if (vote.type === "DOWN") return acc - 1;
+                    const replyLikesAmt = reply.likes.reduce((acc, like) => {
+                      if (like.type === "UP") return acc + 1;
+                      if (like.type === "DOWN") return acc - 1;
                       return acc;
                     }, 0);
 
-                    const replyVote = reply.votes.find(
-                      (vote) => vote.userId === session?.user.id
+                    const replyLike = reply.likes.find(
+                      (like) => like.userId === session?.user.id
                     );
 
                     return (
@@ -100,8 +99,8 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
                       >
                         <PostComment
                           comment={reply}
-                          currentVote={replyVote}
-                          votesAmt={replyVotesAmt}
+                          currentLike={replyLike}
+                          likesAmt={replyLikesAmt}
                           postId={postId}
                         />
                       </div>

@@ -1,25 +1,25 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { User } from 'next-auth'
+import React from "react";
+import { User } from "next-auth";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import Link from 'next/link'
-import { signOut, useSession } from 'next-auth/react'
-import UserAvatar from './UserAvatar'
-import Themes from '../Themes'
+} from "@/components/ui/dropdown-menu";
+import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+import UserAvatar from "./UserAvatar";
+import Themes from "../Themes";
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
-  user: Pick<User, 'image'>
+  user: Pick<User, "image">;
 }
 
 export const UserAccountNav = ({ user }: UserAccountNavProps) => {
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
   return (
     <DropdownMenu>
@@ -37,28 +37,30 @@ export const UserAccountNav = ({ user }: UserAccountNavProps) => {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href={'/publicar'}>Publicar novo conteúdo</Link>
+          <Link href={"/publicar"}>Publicar novo conteúdo</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href={`/${session?.user.username}`}>Meus conteúdos</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={''}>Editar perfil</Link>
+          <Link href={""}>Editar perfil</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <Themes />
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          className="font-semibold text-red-500 focus:text-red-500"
-          onClick={(e) => {
-            e.preventDefault()
-            localStorage.clear()
-            signOut({ redirect: true, callbackUrl: '/' })
-          }}
-        >
-          Sign out
+        <DropdownMenuItem asChild>
+          <button
+            className="font-semibold text-red-500 focus:text-red-500 w-full"
+            onClick={(e) => {
+              e.preventDefault();
+              localStorage.removeItem("theme");
+              signOut({ redirect: true, callbackUrl: "/" });
+            }}
+          >
+            Sign out
+          </button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};

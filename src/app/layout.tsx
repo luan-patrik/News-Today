@@ -21,7 +21,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-br" className={inter.className}>
+    <html lang="pt-Br" className={inter.className}>
       <body>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Providers>

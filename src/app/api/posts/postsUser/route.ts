@@ -21,7 +21,11 @@ export async function GET(req: Request) {
       where: {
         username: username,
       },
-      include: {
+      select: {
+        id: true,
+        username: true,
+        updatedAt: true,
+        createdAt: true,
         posts: {
           skip: (parseInt(page) - 1) * POSTS_PER_PAGE,
 
@@ -35,7 +39,7 @@ export async function GET(req: Request) {
                 username: true,
               },
             },
-            votes: true,
+            likes: true,
             comments: true,
           },
         },

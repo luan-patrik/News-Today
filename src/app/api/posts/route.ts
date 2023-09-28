@@ -22,7 +22,7 @@ export async function GET(req: Request) {
       skip: (parseInt(page) - 1) * POSTS_PER_PAGE,
       take: POSTS_PER_PAGE,
       include: {
-        votes: true,
+        likes: true,
         comments: true,
         author: {
           select: {
