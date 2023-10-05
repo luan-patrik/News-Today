@@ -17,7 +17,7 @@ export async function PATCH(req: Request) {
     const { postId, likeType } = PostLikeValidator.parse(body);
 
     if (!session?.user) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Unauthorized.", { status: 401 });
     }
     const existingLike = await prisma.like.findFirst({
       where: {
@@ -40,7 +40,7 @@ export async function PATCH(req: Request) {
       },
     });
     if (!post) {
-      return new NextResponse("Post not found", { status: 404 });
+      return new NextResponse("Post not found.", { status: 404 });
     }
 
     if (existingLike) {
@@ -53,7 +53,7 @@ export async function PATCH(req: Request) {
             },
           },
         });
-        return new NextResponse("Like removido com sucesso", { status: 200 });
+        return new NextResponse("Like removed successfully.", { status: 200 });
       }
       await prisma.like.update({
         where: {
@@ -107,14 +107,16 @@ export async function PATCH(req: Request) {
       await redis.hset(`post:${postId}`, cachePayload);
     }
 
-    return new NextResponse("Like adicionado com sucesso", { status: 200 });
+    return new NextResponse("Like added successfully.", { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new NextResponse("Invalid POST request data passed", {
+      return new NextResponse("Invalid request data passed.", {
         status: 422,
       });
     }
 
-    return new NextResponse("Please try again", { status: 500 });
+    return new NextResponse("Unable to add like. Try again later.", {
+      status: 500,
+    });
   }
 }

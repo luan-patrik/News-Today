@@ -73,6 +73,7 @@ const SignIn = () => {
                   <Input
                     id="email"
                     type="email"
+                    className="bg-card"
                     autoComplete="false"
                     {...field}
                   />
@@ -90,7 +91,7 @@ const SignIn = () => {
                   <div className="relative flex">
                     <Input
                       id="password"
-                      className="pr-12"
+                      className="pr-12 bg-card"
                       type={passwordIsVisible ? "text" : "password"}
                       {...field}
                     />

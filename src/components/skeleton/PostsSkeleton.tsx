@@ -2,7 +2,7 @@ import { Skeleton } from "../ui/skeleton";
 
 export const PostsSkeleton = () => {
   return (
-    <div className="container">
+    <div className="container py-4">
       <div className="mb-2 flex flex-row">
         <div className="mr-2">
           <Skeleton className="w-6 h-4 rounded" />
@@ -23,7 +23,7 @@ export const PostsSkeleton = () => {
 
 export const PostsUserSkeleton = () => {
   return (
-    <div className="container">
+    <div className="container py-4">
       <Skeleton className="w-1/4 h-10" />
       <hr className="my-4 " />
       <div className="mb-2 flex flex-row">

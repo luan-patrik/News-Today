@@ -2,17 +2,18 @@ import { getAuthSession } from "@/lib/auth";
 import prisma from "@/lib/prismadb";
 import PostComment from "./comment/PostComment";
 import CreateComment from "./CreateComment";
-import { Comment, CommentLike, User } from "@prisma/client";
+import { Comment, CommentLike } from "@prisma/client";
+import { SafeUser } from "@/types/prismadb";
 
 type ExtendedComment = Comment & {
   likes: CommentLike[];
-  author: User;
+  author: SafeUser;
   replies: ReplyComment[];
 };
 
 type ReplyComment = Comment & {
   likes: CommentLike[];
-  author: User;
+  author: SafeUser;
 };
 
 interface CommentsSectionProps {
@@ -84,7 +85,6 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
                   .map((reply) => {
                     const replyLikesAmt = reply.likes.reduce((acc, like) => {
                       if (like.type === "UP") return acc + 1;
-                      if (like.type === "DOWN") return acc - 1;
                       return acc;
                     }, 0);
 

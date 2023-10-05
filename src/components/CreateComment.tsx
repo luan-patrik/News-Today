@@ -74,17 +74,16 @@ const CreateComment = ({ postId, replyToId }: CreateCommentProps) => {
       <Label htmlFor="comment">Comentários</Label>
       <div className="mt-2">
         <Textarea
-          className="w-full rounded-md"
+          className="w-full rounded-md resize-none"
           id="comment"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          rows={1}
           placeholder="Seu comentário"
         />
 
         <div className="mt-2 flex justify-end">
           <Button
-            className="bg-green-500 hover:bg-green-600"
+            variant="done"
             onClick={() => comment({ postId, text: input, replyToId })}
           >
             Comentar

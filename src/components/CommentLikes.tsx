@@ -33,7 +33,7 @@ const CommentLikes = ({
         commentId,
         likeType,
       };
-      await axios.patch("/api/post/like/", payload);
+      await axios.patch("/api/post/comment/like/", payload);
     },
     onError: (err, likeType) => {
       if (likeType === "UP") setLikesAmt((prev) => prev - 1);

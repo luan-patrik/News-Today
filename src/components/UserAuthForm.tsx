@@ -3,7 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
-import { ReactElement, useCallback, useState } from "react";
+import { ReactElement, useCallback } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -14,7 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import { ChevronLeft, X } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   onSubmit: () => void;
@@ -72,7 +72,7 @@ const UserAuthForm = ({
   return (
     <div className={cn("flex justify-center", className)} {...props}>
       <div className="justify-center items-center flex overflow-x-hidden fixed inset-0 w-full bg-background">
-        <Card className="bg-card border-none sm:border-solid rounded-none sm:rounded-md relative w-full sm:w-3/4 md:w-3/6 lg:w-3/7 xl:w-2/6 mx-auto h-full sm:h-auto sm:shadow-md">
+        <Card className="bg-background border-none sm:border-solid rounded-none sm:rounded-md relative w-full sm:w-3/4 md:w-3/6 lg:w-3/7 xl:w-2/6 mx-auto h-full sm:h-auto sm:shadow-md">
           <Link
             title="Voltar para o início"
             href={"/"}
@@ -93,8 +93,7 @@ const UserAuthForm = ({
                 type="button"
                 variant="outline"
                 className="relative bg-accent"
-                // onClick={loginWithGoogle}
-                disabled={true}
+                onClick={loginWithGoogle}
               >
                 Continue com Google
               </Button>

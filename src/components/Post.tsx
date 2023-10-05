@@ -37,25 +37,28 @@ const Post = ({
             {post.title}
           </Link>
         </div>
-        <div className="text-xs text-neutral-600 dark:text-neutral-400 flex mt-2 overflow-auto break-words">
-          <div>
+        <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-2">
+          <span>
             {_likesAmt < 2 ? `${_likesAmt} curtida` : `${_likesAmt} curtidas`}
-          </div>
-          &nbsp;·&nbsp;
-          <div className="overflow-auto break-words">
+          </span>
+          {" · "}
+          <span className="whitespace-nowrap">
             {commentAmt < 2
               ? `${commentAmt} comentário`
               : `${commentAmt} comentários`}
-          </div>
-          &nbsp;·&nbsp;
+          </span>
+          {" · "}
           <Link
             href={`/${post.author.username}`}
             className="cursor-pointer underline-offset-2 hover:underline"
           >
             {post.author.username}
           </Link>
-          &nbsp;·&nbsp;
-          <span title={formatTimeTitle(new Date(post.createdAt))}>
+          {" · "}
+          <span
+            className="whitespace-nowrap"
+            title={formatTimeTitle(new Date(post.createdAt))}
+          >
             {formatTimeToNow(new Date(post.createdAt))}
           </span>
         </div>

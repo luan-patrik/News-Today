@@ -114,6 +114,7 @@ const SignUp = () => {
                   <Input
                     type="text"
                     disabled={isLoading}
+                    className="bg-card"
                     autoComplete="false"
                     {...field}
                   />
@@ -131,6 +132,7 @@ const SignUp = () => {
                 <FormControl>
                   <Input
                     type="email"
+                    className="bg-card"
                     disabled={isLoading}
                     autoComplete="false"
                     {...field}
@@ -147,7 +149,12 @@ const SignUp = () => {
               <FormItem>
                 <FormLabel>Senha</FormLabel>
                 <FormControl>
-                  <Input type="password" disabled={isLoading} {...field} />
+                  <Input
+                    type="password"
+                    className="bg-card"
+                    disabled={isLoading}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -160,7 +167,12 @@ const SignUp = () => {
               <FormItem>
                 <FormLabel>Confirmar senha</FormLabel>
                 <FormControl>
-                  <Input type="password" disabled={isLoading} {...field} />
+                  <Input
+                    type="password"
+                    className="bg-card"
+                    disabled={isLoading}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

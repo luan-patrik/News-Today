@@ -10,7 +10,6 @@ import {
 } from "./ui/dropdown-menu";
 
 const Themes = () => {
-  const { data: session } = useSession();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState<boolean>(false);
 

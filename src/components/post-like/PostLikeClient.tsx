@@ -54,7 +54,7 @@ const PostLikeClient = ({
       }
       return toast({
         title: "Somenthing went wrong",
-        description: "Your Like was not registered, please try again",
+        description: "Your Like was not registered. Try again later.",
         variant: "destructive",
       });
     },
@@ -68,8 +68,6 @@ const PostLikeClient = ({
       }
     },
   });
-
-  console.log(currentLike);
 
   return (
     <div className="flex flex-col pr-2 justify-center">

@@ -10,7 +10,7 @@ interface EmptyStateProps {
 
 const EmptyState = ({ title, subtitle, redirectInitial }: EmptyStateProps) => {
   return (
-    <div className="container flex flex-col justify-center items-center text-foreground">
+    <div className="container py-4 flex flex-col justify-center items-center text-foreground">
       <div>
         <div className="text-2xl font-bold text-center">{title}</div>
         <div className="font-medium text-xl mt-2">{subtitle}</div>

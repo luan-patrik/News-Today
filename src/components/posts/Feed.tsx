@@ -2,19 +2,19 @@
 
 import React from "react";
 import { useSession } from "next-auth/react";
-import Post from "./Post";
+import Post from "../Post";
 import { useGetPosts } from "@/hooks/use-get-posts";
-import PaginationControls from "./PaginationControls";
-import { PostsSkeleton } from "./skeleton/PostsSkeleton";
+import PaginationControls from "../PaginationControls";
+import { PostsSkeleton } from "../skeleton/PostsSkeleton";
 import { notFound } from "next/navigation";
 import { useGetNumberPosts } from "@/hooks/use-get-number-posts";
 import { POSTS_PER_PAGE } from "@/config";
 
-interface Page {
+interface FeedProps {
   numberPage: string;
 }
 
-const PostFeed = ({ numberPage }: Page) => {
+const Feed = ({ numberPage }: FeedProps) => {
   const { data: session } = useSession();
 
   const { data: posts, isLoading, error } = useGetPosts(numberPage);
@@ -24,7 +24,7 @@ const PostFeed = ({ numberPage }: Page) => {
   const totalPages = Math.ceil(allPosts / POSTS_PER_PAGE);
 
   if (
-    isNaN(parseInt(numberPage)) ||
+    !/^\d+$/.test(numberPage) ||
     parseInt(numberPage) < 1 ||
     parseInt(numberPage) > totalPages
   )
@@ -35,7 +35,7 @@ const PostFeed = ({ numberPage }: Page) => {
   if (error) return "An error has ocurred:" + error;
 
   return (
-    <div className="container">
+    <div className="container py-4">
       {posts?.map((post, index) => {
         const likesAmt = post.likes.reduce((acc, like) => {
           if (like.type === "UP") return acc + 1;
@@ -69,4 +69,4 @@ const PostFeed = ({ numberPage }: Page) => {
   );
 };
 
-export default PostFeed;
+export default Feed;

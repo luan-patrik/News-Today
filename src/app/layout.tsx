@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Tabnews - CLONE",
+  title: "Posts - Tabnews",
   description: "Clone do tabnews para estudo",
 };
 
@@ -26,7 +26,7 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Providers>
             <Navbar />
-            <div className="py-4">{children}</div>
+            {children}
           </Providers>
           <Toaster />
         </ThemeProvider>

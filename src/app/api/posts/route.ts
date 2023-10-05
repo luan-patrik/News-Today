@@ -35,9 +35,9 @@ export async function GET(req: Request) {
     return new NextResponse(JSON.stringify(posts), { status: 200 });
   } catch (error) {
     if (error instanceof NextResponse) {
-      return new NextResponse("Invalid request data passed", { status: 422 });
+      return new NextResponse("Invalid request data passed.", { status: 422 });
     }
 
-    return new NextResponse("Could not fetch posts", { status: 500 });
+    return new NextResponse("Unable to fetch posts.", { status: 500 });
   }
 }

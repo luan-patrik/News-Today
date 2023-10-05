@@ -9,10 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type EditorJS from "@editorjs/editorjs";
 
 import { Input } from "@/components/ui/input";
-import {
-  PostCreationRequest,
-  PostValidator,
-} from "@/lib/validators/validators";
+import { PostCreationRequest, PostValidator } from "@/lib/validators/post";
 import { uploadFiles } from "@/lib/uploadthing";
 import { useToast } from "@/components/ui/use-toast";
 import "@/styles/editor.css";
@@ -43,7 +40,6 @@ const EditorPost = () => {
     const EditorJS = (await import("@editorjs/editorjs")).default;
     const Embed = (await import("@editorjs/embed")).default;
     const Code = (await import("@editorjs/code")).default;
-    const LinkTool = (await import("@editorjs/link")).default;
     const ImageTool = (await import("@editorjs/image")).default;
 
     if (!ref.current) {
@@ -56,12 +52,6 @@ const EditorPost = () => {
         inlineToolbar: true,
         data: { blocks: [] },
         tools: {
-          LinkTool: {
-            class: LinkTool,
-            config: {
-              endpoint: "/api/link",
-            },
-          },
           image: {
             class: ImageTool,
             config: {
@@ -138,7 +128,7 @@ const EditorPost = () => {
       setIsLoading(false);
       return toast({
         title: "Something went wrong",
-        description: "Your post was not published, please try again later",
+        description: "Your post was not published. Try again later.",
         variant: "destructive",
       });
     },
@@ -174,7 +164,7 @@ const EditorPost = () => {
     <>
       <div className="w-full">
         <form id="news-post-form" onSubmit={handleSubmit(onSubmit)}>
-          <div className="gap-4 grid">
+          <div className="gap-6 grid">
             <Input
               placeholder="Título"
               className="bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50"
@@ -196,7 +186,7 @@ const EditorPost = () => {
       <div className="w-full flex justify-end">
         <Button
           type="submit"
-          className="bg-green-500 hover:bg-green-600 w-24"
+          variant="done"
           form="news-post-form"
           disabled={isLoading}
         >

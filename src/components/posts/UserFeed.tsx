@@ -7,15 +7,15 @@ import { POSTS_PER_PAGE } from "@/config";
 import { useSession } from "next-auth/react";
 import { useGetPostsUser } from "@/hooks/use-get-posts-user";
 import { notFound } from "next/navigation";
-import { PostsUserSkeleton } from "./skeleton/PostsSkeleton";
-import EmptyState from "./EmptyState";
+import { PostsUserSkeleton } from "../skeleton/PostsSkeleton";
+import EmptyState from "../EmptyState";
 
-interface PostUserFeedProps {
+interface UserFeedProps {
   username: string;
   numberPage: string;
 }
 
-const PostUserFeed = ({ username, numberPage }: PostUserFeedProps) => {
+const UserFeed = ({ username, numberPage }: UserFeedProps) => {
   const { data: session } = useSession();
   const {
     data: postsUser,
@@ -26,8 +26,6 @@ const PostUserFeed = ({ username, numberPage }: PostUserFeedProps) => {
   const totalPages = Math.ceil(
     Number(postsUser?._count.posts) / POSTS_PER_PAGE
   );
-
-  const parsedPage = parseInt(numberPage);
 
   if (postsUser?._count.posts === 0)
     return (
@@ -42,7 +40,7 @@ const PostUserFeed = ({ username, numberPage }: PostUserFeedProps) => {
     );
 
   if (
-    isNaN(parseInt(numberPage)) ||
+    !/^\d+$/.test(numberPage) ||
     parseInt(numberPage) < 1 ||
     parseInt(numberPage) > totalPages
   )
@@ -55,13 +53,12 @@ const PostUserFeed = ({ username, numberPage }: PostUserFeedProps) => {
   if (!postsUser?.username) notFound();
 
   return (
-    <div className="container">
+    <div className="container py-4">
       <h1 className="font-bold text-2xl">{postsUser?.username}</h1>
       <hr className="my-4" />
       {postsUser?.posts.map((post, index) => {
         const likesAmt = post.likes.reduce((acc, like) => {
           if (like.type === "UP") return acc + 1;
-          if (like.type === "DOWN") return acc - 1;
           return acc;
         }, 0);
 
@@ -98,4 +95,4 @@ const PostUserFeed = ({ username, numberPage }: PostUserFeedProps) => {
   );
 };
 
-export default PostUserFeed;
+export default UserFeed;

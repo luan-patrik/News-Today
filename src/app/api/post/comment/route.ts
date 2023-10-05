@@ -1,19 +1,19 @@
-import { getAuthSession } from '@/lib/auth'
-import { CommentValidator } from '@/lib/validators/comment'
-import { NextResponse } from 'next/server'
-import prisma from '@/lib/prismadb'
-import { z } from 'zod'
+import { getAuthSession } from "@/lib/auth";
+import { CommentValidator } from "@/lib/validators/comment";
+import { NextResponse } from "next/server";
+import prisma from "@/lib/prismadb";
+import { z } from "zod";
 
 export async function PATCH(req: Request) {
   try {
-    const session = await getAuthSession()
+    const session = await getAuthSession();
 
-    const body = await req.json()
+    const body = await req.json();
 
-    const { postId, text, replyToId } = CommentValidator.parse(body)
+    const { postId, text, replyToId } = CommentValidator.parse(body);
 
     if (!session?.user) {
-      return new NextResponse('Unauthorized', { status: 401 })
+      return new NextResponse("Unauthorized.", { status: 401 });
     }
 
     await prisma.comment.create({
@@ -23,17 +23,16 @@ export async function PATCH(req: Request) {
         authorId: session.user.id,
         replyToId,
       },
-    })
+    });
 
-    return new NextResponse('Comentário criado com sucesso', { status: 201 })
+    return new NextResponse("Comment created successfully.", { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new NextResponse('Invalid request data passed', { status: 422 })
+      return new NextResponse("Invalid request data passed.", { status: 422 });
     }
 
-    return new NextResponse(
-      'Could not create comment, please try again later',
-      { status: 500 }
-    )
+    return new NextResponse("Unable to create comment. Try again later.", {
+      status: 500,
+    });
   }
 }

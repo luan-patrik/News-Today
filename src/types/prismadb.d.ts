@@ -1,10 +1,12 @@
-import { Comment, Like, Post, User  } from "@prisma/client";
+import { Comment, Like, Post, User } from "@prisma/client";
 
 type SafeUser = Omit<User, "name", "hashedPassword", "email", "role">;
 
 export type ExtendedPost = Post & {
   likes: Like[];
-  author: SafeUser;
+  author: {
+    username: SafeUser;
+  };
   comments: Comment[];
 };
 

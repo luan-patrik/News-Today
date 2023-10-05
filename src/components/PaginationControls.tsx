@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { POSTS_PER_PAGE } from "@/config";
-import { useGetNumberPosts } from "@/hooks/use-get-number-posts";
 
 interface PaginationControlsProps {
   page: string;

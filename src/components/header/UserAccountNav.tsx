@@ -43,7 +43,7 @@ export const UserAccountNav = ({ user }: UserAccountNavProps) => {
           <Link href={`/${session?.user.username}`}>Meus conteúdos</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={""}>Editar perfil</Link>
+          <Link href={"/perfil"}>Editar perfil</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <Themes />

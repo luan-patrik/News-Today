@@ -1,4 +1,5 @@
 import { ExtendedPost } from "@/types/prismadb";
+import { Prisma } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -7,7 +8,7 @@ export const useGetPosts = (page: number | string) => {
     queryKey: ["posts", page],
     queryFn: async () => {
       const { data } = await axios.get(`/api/posts?page=${page}`);
-      return data as ExtendedPost[];
+      return data as ExtendedPost[] & { _count: Prisma.PostCountOutputType };
     },
     retry: 3,
     keepPreviousData: true,

@@ -55,7 +55,7 @@ const PostComment = ({
     onError: () => {
       return toast({
         title: "Something went wrong.",
-        description: "Comment wasn't created successfully. Please try again.",
+        description: "Comment wasn't created successfully. Try again later.",
         variant: "destructive",
       });
     },

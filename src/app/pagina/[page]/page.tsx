@@ -1,5 +1,5 @@
 import React from "react";
-import PostFeed from "@/components/PostFeed";
+import PostFeed from "@/components/posts/Feed";
 
 interface PageOfPostsProps {
   params: {
