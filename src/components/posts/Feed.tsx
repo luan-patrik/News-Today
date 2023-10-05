@@ -26,8 +26,7 @@ const Feed = ({ numberPage }: FeedProps) => {
     !/^\d+$/.test(numberPage) ||
     parseInt(numberPage) < 1 ||
     parseInt(numberPage) > totalPages
-  )
-    notFound();
+  ) notFound();
 
   if (isLoading) return <PostsSkeleton />;
 
