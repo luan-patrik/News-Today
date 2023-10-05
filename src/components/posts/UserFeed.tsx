@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
+import { useSession } from "next-auth/react";
+import { notFound } from "next/navigation";
 import Post from "@/components/Post";
 import PaginationControls from "@/components/PaginationControls";
 import { POSTS_PER_PAGE } from "@/config";
-import { useSession } from "next-auth/react";
 import { useGetPostsUser } from "@/hooks/use-get-posts-user";
-import { notFound } from "next/navigation";
 import { PostsUserSkeleton } from "../skeleton/PostsSkeleton";
 import EmptyState from "../EmptyState";
 

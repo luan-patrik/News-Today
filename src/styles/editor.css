@@ -8,13 +8,13 @@
 .cdx-button,
 .ce-popover,
 .ce-toolbar__plus:hover {
-  background: theme('colors.popover.DEFAULT');
-  color: theme('colors.foreground');
-  border-color: theme('colors.border');
+  background: theme("colors.popover.DEFAULT");
+  color: theme("colors.foreground");
+  border-color: theme("colors.border");
 }
 
 .ce-popover-item__title {
-  color: theme('colors.foreground');
+  color: theme("colors.foreground");
 }
 
 .ce-inline-tool,
@@ -22,26 +22,26 @@
 .ce-toolbox__button,
 .cdx-settings-button,
 .ce-toolbar__plus {
-  background: theme('colors.popover.DEFAULT');
-  color: theme('colors.foreground');
-  border-color: theme('colors.border');
+  background: theme("colors.popover.DEFAULT");
+  color: theme("colors.foreground");
+  border-color: theme("colors.border");
 }
 
 .ce-popover-item__icon,
 .ce-conversion-tool__icon {
-  background-color: theme('colors.muted.DEFAULT');
-  color: theme('colors.foreground');
+  background-color: theme("colors.muted.DEFAULT");
+  color: theme("colors.foreground");
   box-shadow: none;
 }
 
 .cdx-search-field {
-  border-color: theme('colors.border');
-  background: theme('colors.popover.DEFAULT');
-  color: theme('colors.foreground');
+  border-color: theme("colors.border");
+  background: theme("colors.popover.DEFAULT");
+  color: theme("colors.foreground");
 }
 
 ::selection {
-  background: theme('colors.accent.DEFAULT');
+  background: theme("colors.accent.DEFAULT");
 }
 
 .cdx-settings-button:hover,
@@ -54,12 +54,12 @@
 .ce-popover-item:hover,
 .ce-conversion-tool:hover,
 .ce-toolbar__settings-btn:hover {
-  background-color: theme('colors.accent.DEFAULT') !important;
-  color: theme('colors.accent.foreground');
+  background-color: theme("colors.accent.DEFAULT") !important;
+  color: theme("colors.accent.foreground");
 }
 
 .cdx-notify--error {
-  background: theme('colors.destructive.DEFAULT') !important;
+  background: theme("colors.destructive.DEFAULT") !important;
 }
 
 .cdx-notify__cross::after,

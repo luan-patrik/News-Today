@@ -1,14 +1,13 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { AvatarProps } from '@radix-ui/react-avatar'
-import { User } from 'next-auth'
-import Image from 'next/image'
-import { Icons } from '@/components/Icons'
+import { User } from "next-auth";
+import Image from "next/image";
+import { AvatarProps } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Icons } from "@/components/Icons";
 
 interface UserAvatarProps extends AvatarProps {
-  user: Pick<User, 'image'>
+  user: Pick<User, "image">;
 }
 
 const UserAvatar = ({ user, ...props }: UserAvatarProps) => {
@@ -29,7 +28,7 @@ const UserAvatar = ({ user, ...props }: UserAvatarProps) => {
         </AvatarFallback>
       )}
     </Avatar>
-  )
-}
+  );
+};
 
-export default UserAvatar
+export default UserAvatar;

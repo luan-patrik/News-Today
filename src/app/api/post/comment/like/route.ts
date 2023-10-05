@@ -1,8 +1,8 @@
+import { z } from "zod";
 import { NextResponse } from "next/server";
 import { getAuthSession } from "@/lib/auth";
 import { CommentLikeValidator } from "@/lib/validators/like";
 import prisma from "@/lib/prismadb";
-import { z } from "zod";
 
 export async function PATCH(req: Request) {
   try {

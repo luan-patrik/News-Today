@@ -1,12 +1,12 @@
-import SignUp from '@/components/SignUp'
-import { getAuthSession } from '@/lib/auth'
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
+import SignUp from "@/components/SignUp";
+import { getAuthSession } from "@/lib/auth";
 
 const page = async () => {
-  const session = await getAuthSession()
+  const session = await getAuthSession();
 
   if (session?.user) {
-    redirect('/')
+    redirect("/");
   }
 
   return (
@@ -15,7 +15,7 @@ const page = async () => {
         <SignUp />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

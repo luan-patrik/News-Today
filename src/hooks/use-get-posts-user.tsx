@@ -1,6 +1,6 @@
-import { ExtendedPost, ExtendedPostsUser } from "@/types/prismadb";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { ExtendedPostsUser } from "@/types/prismadb";
 
 export const useGetPostsUser = (username: string, page: number | string) => {
   return useQuery({

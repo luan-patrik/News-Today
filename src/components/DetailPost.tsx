@@ -1,13 +1,13 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
+import { Like, Post } from "@prisma/client";
 import { Heart, Loader2 } from "lucide-react";
+import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import prisma from "@/lib/prismadb";
 import { formatTimeTitle, formatTimeToNow } from "@/lib/utils";
 import EditorOutput from "@/components/editor/EditorOutput";
-import Link from "next/link";
 import PostLikeServer from "./post-like/PostLikeServer";
 import CommentsSection from "./CommentsSection";
-import { Like, Post } from "@prisma/client";
 import { SafeUser } from "@/types/prismadb";
 
 interface PostProps {

@@ -82,7 +82,6 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (trigger === "update" && session.user) {
-        session.user.email = token.email;
         session.user.username = token.username;
       }
 

@@ -1,6 +1,6 @@
+import { redirect } from "next/navigation";
 import UserPerfilForm from "@/components/UserPerfilForm";
 import { authOptions, getAuthSession } from "@/lib/auth";
-import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Perfil",
@@ -26,7 +26,6 @@ const Perfil = async () => {
           user={{
             id: session.user.id,
             username: session.user.username || "",
-            email: session.user.email || "",
           }}
         />
       </div>

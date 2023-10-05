@@ -1,6 +1,6 @@
 import { z } from "zod";
-import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prismadb";
 import { POSTS_PER_PAGE } from "@/config";
 
 export async function GET(req: Request) {

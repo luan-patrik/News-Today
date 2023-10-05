@@ -1,5 +1,5 @@
-import PostUserFeed from "@/components/posts/UserFeed";
 import type { Metadata } from "next";
+import PostUserFeed from "@/components/posts/UserFeed";
 
 interface UserPageProps {
   params: {

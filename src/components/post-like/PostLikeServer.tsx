@@ -1,4 +1,3 @@
-import React from "react";
 import { Like, LikeType, Post } from "@prisma/client";
 import { notFound } from "next/navigation";
 import PostLikeClient from "./PostLikeClient";

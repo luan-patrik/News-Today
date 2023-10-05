@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { POSTS_PER_PAGE } from "@/config";

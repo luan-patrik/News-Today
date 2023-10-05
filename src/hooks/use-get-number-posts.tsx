@@ -1,10 +1,14 @@
-import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
-import useSWR from 'swr'
-const fetcher = (url: any) => axios.get(url).then((res) => res.data)
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 export const useGetNumberPosts = () => {
-  const { data, error, isLoading } = useSWR('/api/getAllPosts', fetcher)
-
-  return { data, error, isLoading }
-}
+  return useQuery({
+    queryKey: ["numberPosts"],
+    queryFn: async () => {
+      const { data } = await axios.get(`/api/getAllPosts`);
+      return data;
+    },
+    retry: 3,
+    keepPreviousData: true,
+  });
+};

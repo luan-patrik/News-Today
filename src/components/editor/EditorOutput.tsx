@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import hljs from "highlight.js";
-import "highlight.js/styles/stackoverflow-dark.css";
 import { Clipboard } from "lucide-react";
+import "highlight.js/styles/stackoverflow-dark.css";
 
 const Output = dynamic(
   async () => (await import("editorjs-react-renderer")).default,

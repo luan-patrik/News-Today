@@ -1,7 +1,7 @@
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { UserAccountNav } from "./UserAccountNav";
 import NoUserThemes from "../NoUserThemes";
-import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
 const Navbar = async () => {

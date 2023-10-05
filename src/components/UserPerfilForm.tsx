@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { User } from "@prisma/client";
 import { z } from "zod";
-
+import { useSession } from "next-auth/react";
 import { PerfilRequest, PerfilValidator } from "@/lib/validators/perfil";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { Label } from "./ui/label";
@@ -16,10 +16,9 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useToast } from "./ui/use-toast";
 import { cn } from "@/lib/utils";
-import { useSession } from "next-auth/react";
 
 interface UserPerfilFormProps extends HTMLAttributes<HTMLFormElement> {
-  user: Pick<User, "id" | "username" | "email">;
+  user: Pick<User, "id" | "username">;
 }
 
 type FormData = z.infer<typeof PerfilValidator>;

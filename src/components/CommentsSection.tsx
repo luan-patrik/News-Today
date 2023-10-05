@@ -1,8 +1,8 @@
+import { Comment, CommentLike } from "@prisma/client";
 import { getAuthSession } from "@/lib/auth";
 import prisma from "@/lib/prismadb";
 import PostComment from "./comment/PostComment";
 import CreateComment from "./CreateComment";
-import { Comment, CommentLike } from "@prisma/client";
 import { SafeUser } from "@/types/prismadb";
 
 type ExtendedComment = Comment & {

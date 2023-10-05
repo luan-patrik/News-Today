@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { CommentLike, LikeType } from "@prisma/client";
-import { CommentLikeRequest } from "@/lib/validators/like";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { usePrevious } from "@mantine/hooks";
+import { Heart } from "lucide-react";
+import { CommentLikeRequest } from "@/lib/validators/like";
 import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
-import { ChevronDown, ChevronUp, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type PartialLike = Pick<CommentLike, "type">;
@@ -36,8 +36,7 @@ const CommentLikes = ({
       await axios.patch("/api/post/comment/like/", payload);
     },
     onError: (err, likeType) => {
-      if (likeType === "UP") setLikesAmt((prev) => prev - 1);
-      else setLikesAmt((prev) => prev + 1);
+      if (likeType === "UP") setLikesAmt((prev) => prev + 1);
 
       setCurrentLike(prevLike);
 

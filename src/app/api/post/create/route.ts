@@ -1,8 +1,8 @@
+import { NextResponse } from "next/server";
+import { z } from "zod";
 import { getAuthSession } from "@/lib/auth";
 import prisma from "@/lib/prismadb";
 import { PostValidator } from "@/lib/validators/post";
-import { NextResponse } from "next/server";
-import { z } from "zod";
 
 export async function POST(req: Request) {
   try {

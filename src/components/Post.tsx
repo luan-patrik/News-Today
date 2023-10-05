@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import { Like, Post } from "@prisma/client";
 import { buttonVariants } from "./ui/button";
 import { cn, formatTimeTitle, formatTimeToNow } from "@/lib/utils";

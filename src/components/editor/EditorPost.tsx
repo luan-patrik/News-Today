@@ -1,20 +1,19 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { Loader2 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type EditorJS from "@editorjs/editorjs";
-
 import { Input } from "@/components/ui/input";
 import { PostCreationRequest, PostValidator } from "@/lib/validators/post";
 import { uploadFiles } from "@/lib/uploadthing";
 import { useToast } from "@/components/ui/use-toast";
-import "@/styles/editor.css";
 import { Button } from "../ui/button";
-import { Loader2 } from "lucide-react";
+import "@/styles/editor.css";
 
 const EditorPost = () => {
   const {

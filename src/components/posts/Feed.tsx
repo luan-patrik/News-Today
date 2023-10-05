@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
 import { useSession } from "next-auth/react";
+import { notFound } from "next/navigation";
 import Post from "../Post";
 import { useGetPosts } from "@/hooks/use-get-posts";
 import PaginationControls from "../PaginationControls";
 import { PostsSkeleton } from "../skeleton/PostsSkeleton";
-import { notFound } from "next/navigation";
 import { useGetNumberPosts } from "@/hooks/use-get-number-posts";
 import { POSTS_PER_PAGE } from "@/config";
 

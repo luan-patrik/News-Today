@@ -1,10 +1,10 @@
+import { z } from "zod";
 import { NextResponse } from "next/server";
 import { getAuthSession } from "@/lib/auth";
 import { PostLikeValidator } from "@/lib/validators/like";
 import prisma from "@/lib/prismadb";
 import { CachedPost } from "@/types/redis";
 import { redis } from "@/lib/redis";
-import { z } from "zod";
 
 const CACHE_AFTER_UPLIKES = 1;
 

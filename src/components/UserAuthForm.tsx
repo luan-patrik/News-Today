@@ -1,9 +1,11 @@
 "use client";
 
+import { ReactElement, useCallback } from "react";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
-import { ReactElement, useCallback } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -13,8 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   onSubmit: () => void;

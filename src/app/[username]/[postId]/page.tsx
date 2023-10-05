@@ -10,9 +10,5 @@ interface PageDetailPostProps {
 export default function PageDetailPost({ params }: PageDetailPostProps) {
   const { username, postId } = params;
 
-  return (
-    <>
-      <Detail username={username} postId={postId} />
-    </>
-  );
+  return <Detail username={username} postId={postId} />;
 }

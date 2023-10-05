@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Comment, CommentLike } from "@prisma/client";
 import axios from "axios";

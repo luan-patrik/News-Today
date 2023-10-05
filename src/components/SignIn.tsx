@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,12 +13,9 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import UserAuthForm from "./UserAuthForm";
 import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
+import { SignInValidator } from "@/lib/validators/auth";
 
-const FormSchema = z.object({
-  email: z.string().min(1).max(255),
-  password: z.string().min(1),
-});
+type FormData = z.infer<typeof SignInValidator>;
 
 const SignIn = () => {
   const { toast } = useToast();
@@ -25,15 +23,15 @@ const SignIn = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [passwordIsVisible, setPasswordIsVisible] = useState<boolean>(false);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<FormData>({
+    resolver: zodResolver(SignInValidator),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+  const onSubmit = async (values: FormData) => {
     setIsLoading(true);
 
     const res = await signIn("credentials", {
@@ -99,6 +97,9 @@ const SignIn = () => {
                     <Button
                       type="button"
                       variant="ghost"
+                      title={
+                        passwordIsVisible ? "Ocultar senha" : "Mostrar senha"
+                      }
                       size="icon"
                       className="absolute right-0 hover:bg-transparent"
                       onClick={showPassword}

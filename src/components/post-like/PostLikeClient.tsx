@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { LikeType } from "@prisma/client";
+import { useEffect, useState } from "react";
 import { usePrevious } from "@mantine/hooks";
-import { Button } from "../ui/button";
-import { Heart } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { Heart } from "lucide-react";
+import { LikeType } from "@prisma/client";
+import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
+import { useToast } from "@/components/ui/use-toast";
 import { PostLikeRequest } from "@/lib/validators/like";
 
 interface PostLikeClient {
@@ -42,8 +42,7 @@ const PostLikeClient = ({
       await axios.patch("/api/post/like/", payload);
     },
     onError: (err, LikeType) => {
-      if (LikeType === "UP") setLikesAmt((prev) => prev - 1);
-      else setLikesAmt((prev) => prev + 1);
+      if (LikeType === "UP") setLikesAmt((prev) => prev + 1);
 
       setCurrentLike(prevLike);
 
@@ -64,7 +63,7 @@ const PostLikeClient = ({
         if (type === "UP") setLikesAmt((prev) => prev - 1);
       } else {
         setCurrentLike(type);
-        if (type === "UP") setLikesAmt((prev) => prev + (currentLike ? 2 : 1));
+        if (type === "UP") setLikesAmt((prev) => prev + (currentLike ? 0 : 1));
       }
     },
   });

@@ -1,4 +1,3 @@
-import React from "react";
 import EditorPost from "@/components/editor/EditorPost";
 import { getAuthSession } from "@/lib/auth";
 
