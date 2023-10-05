@@ -11,7 +11,7 @@ const Navbar = async () => {
     <div className="inset-x-0 h-fit py-2 border-b shadow-sm bg-inherit z-10">
       <div className="container h-full mx-auto flex items-center justify-between gap-2">
         <Link href="/" className="flex gap-2 items-center">
-          Return
+          Início
         </Link>
         <div className="flex items-center">
           {session?.user ? (
