@@ -100,8 +100,6 @@ model Like {
   type   LikeType
 
   @@unique([userId, postId])
-
-  @
 }
 
 model CommentLike {
