@@ -16,7 +16,6 @@ export default async function Publish() {
           </h1>
         </div>
       </div>
-      {/* form */}
       <EditorPost />
     </div>
   );

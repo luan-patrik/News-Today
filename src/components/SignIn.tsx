@@ -42,14 +42,18 @@ const SignIn = () => {
     if (res?.error) {
       setIsLoading(false);
       return toast({
+        title: "Algo deu errado.",
+        description: "Email ou Senha incorretos.",
         variant: "destructive",
-        title: "Algo deu errado :(",
-        description: "Credenciais Inválidas",
       });
     } else {
       router.push("/");
       router.refresh();
-      return toast({ title: "Sucesso", description: "Entrou com sucesso :)" });
+      return toast({
+        title: "Sucesso.",
+        description: "Login efetuado.",
+        variant: "default",
+      });
     }
   };
 

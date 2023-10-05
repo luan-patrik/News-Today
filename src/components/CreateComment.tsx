@@ -51,7 +51,7 @@ const CreateComment = ({ postId, replyToId }: CreateCommentProps) => {
         );
 
         return toast({
-          title: "Houve um problema",
+          title: "Algo deu errado.",
           description: `${errorMessages}`,
           variant: "destructive",
         });
@@ -61,8 +61,8 @@ const CreateComment = ({ postId, replyToId }: CreateCommentProps) => {
       router.refresh();
       setInput("");
       return toast({
-        title: "Sucesso",
-        description: "Comentário criado com sucesso",
+        title: "Sucesso.",
+        description: "Comentário criado.",
         variant: "default",
       });
     },

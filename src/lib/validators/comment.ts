@@ -5,8 +5,8 @@ export const CommentValidator = z.object({
   text: z
     .string()
     .trim()
-    .min(1, { message: "Coloque ao menos 1 caracter" })
-    .max(128, { message: "Máximo de caracteres atingidos: 128" }),
+    .min(1, { message: "Deve conter pelo menos 1 caracter." })
+    .max(128, { message: "Deve conter no máximo 128 caracteres." }),
   replyToId: z.string().optional(),
 });
 

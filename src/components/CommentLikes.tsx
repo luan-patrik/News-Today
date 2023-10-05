@@ -47,8 +47,9 @@ const CommentLikes = ({
       }
 
       return toast({
-        title: "Algo deu errado",
-        description: "Sua curtida não foi registrada, tente novamente",
+        title: "Algo deu errado.",
+        description:
+          "Sua curtida não foi registrada. Tente novamente mais tarde.",
         variant: "destructive",
       });
     },

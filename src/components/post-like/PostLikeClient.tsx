@@ -52,8 +52,8 @@ const PostLikeClient = ({
         }
       }
       return toast({
-        title: "Somenthing went wrong",
-        description: "Your Like was not registered. Try again later.",
+        title: "Algo deu errado.",
+        description: "Seu Like não foi registrado. Tente novamente mais tarde.",
         variant: "destructive",
       });
     },

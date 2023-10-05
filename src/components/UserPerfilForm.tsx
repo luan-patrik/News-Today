@@ -51,22 +51,23 @@ const UserPerfilForm = ({ user, className, ...props }: UserPerfilFormProps) => {
         if (err.response?.status === 409) {
           return toast({
             title: "Nome de usuário já existe.",
-            description: "Tente usar um nome diferente.",
+            description: "Tente colocar um nome diferente.",
             variant: "destructive",
           });
         }
       }
       return toast({
-        title: "Something went wrong.",
-        description: "Your username was not updated. Try again later.",
+        title: "Algo deu errado.",
+        description:
+          "Seu nome de usuário não foi alterado. Tente novamente mais tarde.",
         variant: "destructive",
       });
     },
     onSuccess: () => {
       update();
       toast({
-        title: "Sucesso :)",
-        description: "Nome de usuário alterado com sucesso.",
+        title: "Sucesso.",
+        description: "Nome de usuário alterado.",
         variant: "default",
       });
       router.refresh();
@@ -92,7 +93,7 @@ const UserPerfilForm = ({ user, className, ...props }: UserPerfilFormProps) => {
                 {...register("name")}
               />
               {errors.name && (
-                <p className="text-sm font-medium text-destructive mt-1">
+                <p className="text-xs font-medium text-destructive mt-2">
                   {errors.name.message}
                 </p>
               )}

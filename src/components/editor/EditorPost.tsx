@@ -85,18 +85,6 @@ const EditorPost = () => {
   }, []);
 
   useEffect(() => {
-    if (Object.keys(errors).length) {
-      for (const [_key, value] of Object.entries(errors)) {
-        toast({
-          title: "Somenthing went wrong",
-          description: (value as { message: string }).message,
-          variant: "destructive",
-        });
-      }
-    }
-  }, [errors, toast]);
-
-  useEffect(() => {
     const init = async () => {
       await initializeEditor();
       setTimeout(() => {
@@ -126,8 +114,8 @@ const EditorPost = () => {
     onError: () => {
       setIsLoading(false);
       return toast({
-        title: "Something went wrong",
-        description: "Your post was not published. Try again later.",
+        title: "Algo deu errado.",
+        description: "Seu post não foi publicado. Tente novamente mais tarde.",
         variant: "destructive",
       });
     },
@@ -135,7 +123,9 @@ const EditorPost = () => {
       router.push("/");
 
       return toast({
-        description: "Your post has been published",
+        title: "Sucesso.",
+        description: "Seu post foi publicado",
+        variant: "default",
       });
     },
 
@@ -164,17 +154,24 @@ const EditorPost = () => {
       <div className="w-full">
         <form id="news-post-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="gap-6 grid">
-            <Input
-              placeholder="Título"
-              className="bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50"
-              {...register("title")}
-              ref={(e) => {
-                titleRef(e);
-                // @ts-ignore
-                _titleRef.current = e;
-              }}
-              {...rest}
-            />
+            <div>
+              <Input
+                placeholder="Título"
+                className="bg-neutral-50 dark:bg-neutral-950 text-neutral-950 dark:text-neutral-50"
+                {...register("title")}
+                ref={(e) => {
+                  titleRef(e);
+                  // @ts-ignore
+                  _titleRef.current = e;
+                }}
+                {...rest}
+              />
+              {errors.title && (
+                <p className="text-destructive font-medium text-xs mt-2">
+                  {errors.title.message}
+                </p>
+              )}
+            </div>
             <div
               className="min-h-[400px] w-full rounded-md border border-input text-neutral-950 dark:text-neutral-50 bg-neutral-50 dark:bg-neutral-950 px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
               id="editor"

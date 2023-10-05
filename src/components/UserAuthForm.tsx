@@ -50,8 +50,8 @@ const UserAuthForm = ({
       await signIn("google");
     } catch (error) {
       toast({
-        title: "Error",
-        description: "There was an error logging in with Google",
+        title: "Algo deu errado.",
+        description: "Ocorreu um erro ao fazer login com o Google.",
         variant: "destructive",
       });
     }
@@ -62,8 +62,8 @@ const UserAuthForm = ({
       await signIn("github");
     } catch (error) {
       toast({
-        title: "Error",
-        description: "There was an error logging in with Github",
+        title: "Algo deu errado.",
+        description: "Ocorreu um erro ao fazer login com o Github.",
         variant: "destructive",
       });
     }

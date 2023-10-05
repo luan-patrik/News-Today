@@ -48,16 +48,17 @@ const SignUp = () => {
           callbackUrl: "/",
         });
         toast({
-          title: "Sucesso",
-          description: "Conta criada com sucesso :)",
+          title: "Sucesso.",
+          description: "Sua conta foi criada.",
+          variant: "default",
         });
       })
       .catch((error) => {
         setIsLoading(false);
         toast({
+          title: "Algo deu errado.",
+          description: "Erro ao criar sua conta. Tente novamente mais tarde.",
           variant: "destructive",
-          title: "Algo deu errado :(",
-          description: "Tente novamente mais tarde",
         });
       });
   };
