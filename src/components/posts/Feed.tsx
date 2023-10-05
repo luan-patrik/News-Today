@@ -22,11 +22,12 @@ const Feed = ({ numberPage }: FeedProps) => {
 
   const totalPages = Math.ceil(allPosts / POSTS_PER_PAGE);
 
-  // if (
-  //   !/^\d+$/.test(numberPage) ||
-  //   parseInt(numberPage) < 1 ||
-  //   parseInt(numberPage) > totalPages
-  // ) notFound();
+  if (
+    !/^\d+$/.test(numberPage) ||
+    parseInt(numberPage) < 1 ||
+    parseInt(numberPage) > totalPages
+  )
+    notFound();
 
   if (isLoading) return <PostsSkeleton />;
 
