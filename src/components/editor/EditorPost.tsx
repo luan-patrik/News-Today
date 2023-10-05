@@ -182,6 +182,8 @@ const EditorPost = () => {
       <div className="w-full flex justify-end">
         <Button
           type="submit"
+          size='default'
+          className="w-24"
           variant="done"
           form="news-post-form"
           disabled={isLoading}

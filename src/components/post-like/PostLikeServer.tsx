@@ -25,7 +25,7 @@ const PostLikeServer = async ({
     const post = await getData();
     if (!post) return notFound();
 
-    _likesAmt = post.likes.reduce((acc, like) => {
+    _likesAmt = post.likes.reduce((acc: number, like) => {
       if (like.type === "UP") return acc + 1;
       return acc;
     }, 0);

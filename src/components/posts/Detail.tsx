@@ -8,6 +8,8 @@ interface DetailProps {
 }
 
 const Detail = async ({ username, postId }: DetailProps) => {
+  if (!/^[0-9A-Fa-f]+$/.test(postId) || postId.length !== 24) notFound();
+
   const detailPost = await prisma.post.findUnique({
     where: {
       author: { username: username },

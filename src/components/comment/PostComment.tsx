@@ -7,6 +7,7 @@ import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import TextareaAutoSize from "react-textarea-autosize";
 import { SafeUser } from "@/types/prismadb";
 import { useOnClickOutside } from "@/hooks/use-on-click-outside";
 import { CommentRequest } from "@/lib/validators/comment";
@@ -15,7 +16,6 @@ import { useToast } from "../ui/use-toast";
 import CommentLikes from "../CommentLikes";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
 
 type ExtendedComment = Comment & {
   likes: CommentLike[];
@@ -111,9 +111,9 @@ const PostComment = ({
         <div className="grid w-full gap-1.5">
           <Label htmlFor="comment">Seu comentário</Label>
           <div className="mt-2">
-            <Textarea
+            <TextareaAutoSize
               autoFocus
-              className="w-full"
+              className="flex min-h-[80px] max-h-52 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
               onFocus={(e) =>
                 e.currentTarget.setSelectionRange(
                   e.currentTarget.value.length,

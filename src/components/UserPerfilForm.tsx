@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { User } from "@prisma/client";
 import { z } from "zod";
 import { useSession } from "next-auth/react";
+import { Loader2 } from "lucide-react";
 import { PerfilRequest, PerfilValidator } from "@/lib/validators/perfil";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { Label } from "./ui/label";
@@ -104,10 +105,15 @@ const UserPerfilForm = ({ user, className, ...props }: UserPerfilFormProps) => {
           <Button
             disabled={isLoading}
             variant="done"
+            size='default'
             className="w-full"
             type="submit"
           >
-            Salvar
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              "Salvar"
+            )}
           </Button>
         </CardFooter>
       </Card>

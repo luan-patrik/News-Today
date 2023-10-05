@@ -59,7 +59,7 @@ const CommentLikes = ({
         if (type === "UP") setLikesAmt((prev) => prev - 1);
       } else {
         setCurrentLike({ type });
-        if (type === "UP") setLikesAmt((prev) => prev + (currentLike ? 2 : 1));
+        if (type === "UP") setLikesAmt((prev) => prev + (currentLike ? 0 : 1));
       }
     },
   });
