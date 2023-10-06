@@ -20,7 +20,7 @@ const Feed = ({ numberPage }: FeedProps) => {
 
   const { data: allPosts } = useGetNumberPosts();
 
-  const totalPages = Math.ceil(allPosts / POSTS_PER_PAGE);
+  const totalPages = Math.ceil(Number(allPosts) / POSTS_PER_PAGE);
 
   if (
     !/^\d+$/.test(numberPage) ||
