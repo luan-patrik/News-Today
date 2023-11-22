@@ -13,8 +13,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Posts - Tabnews",
-  description: "Clone do tabnews para estudo",
+  title: "Posts - NewsToday",
+  description: "NeswToday - Seu site de noticias.",
+  icons: {
+    icon: "/logo.webp",
+  },
 };
 
 export default async function RootLayout({

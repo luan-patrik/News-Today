@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth";
+import Image from "next/image";
 import Link from "next/link";
 import { UserAccountNav } from "./UserAccountNav";
 import NoUserThemes from "../NoUserThemes";
@@ -10,8 +11,16 @@ const Navbar = async () => {
   return (
     <div className="inset-x-0 h-fit py-2 border-b shadow-sm bg-inherit z-10">
       <div className="container h-full mx-auto flex items-center justify-between gap-2">
-        <Link href="/" className="flex gap-2 items-center">
-          Início
+        <Link href="/" className="flex items-center">
+          <Image
+            className="aspect-square"
+            src="/logo.webp"
+            alt="Logo"
+            width={40}
+            height={40}
+            title="Início"
+            aria-label="Início"
+          />
         </Link>
         <div className="flex items-center">
           {session?.user ? (
