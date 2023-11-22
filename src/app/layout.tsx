@@ -6,7 +6,11 @@ import Navbar from "../components/header/Navbar";
 import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  preload: true,
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "Posts - Tabnews",
@@ -19,7 +23,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-Br" className={inter.className}>
+    <html lang="pt-Br" className={inter.variable}>
       <body>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Providers>

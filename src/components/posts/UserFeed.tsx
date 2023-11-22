@@ -34,7 +34,6 @@ const UserFeed = ({ username, numberPage }: UserFeedProps) => {
           subtitle="Este usuário não possui postagens"
           redirectInitial
         />
-        ;
       </>
     );
 

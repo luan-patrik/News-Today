@@ -11,7 +11,7 @@ export async function generateMetadata({
   params: { username },
 }: UserPageProps): Promise<Metadata> {
   return {
-    title: username + " - Tabnews",
+    title: username + " - NewsToday",
     description: "Posts de " + username,
   };
 }

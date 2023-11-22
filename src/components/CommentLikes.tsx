@@ -8,6 +8,7 @@ import { CommentLikeRequest } from "@/lib/validators/like";
 import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 type PartialLike = Pick<CommentLike, "type">;
 
@@ -26,6 +27,7 @@ const CommentLikes = ({
   const [currentLike, setCurrentLike] = useState(initialLike);
   const prevLike = usePrevious(currentLike);
   const { toast } = useToast();
+  const router = useRouter()
 
   const { mutate: like } = useMutation({
     mutationFn: async (likeType: LikeType) => {
@@ -42,7 +44,7 @@ const CommentLikes = ({
 
       if (err instanceof AxiosError) {
         if (err.response?.status === 401) {
-          alert("Faça login");
+          return router.push("/sign-in");
         }
       }
 
